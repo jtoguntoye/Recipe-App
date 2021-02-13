@@ -1,5 +1,4 @@
-package com.application.recipeapp
-
+package com.application.recipeapp.presentation
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.ArrayMap
@@ -17,6 +16,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.textInputServiceFactory
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
+import com.application.recipeapp.R
 
 
 class MainActivity : AppCompatActivity() {
@@ -76,22 +76,22 @@ class MainActivity : AppCompatActivity() {
                     modifier = Modifier.padding(16.dp)
                 ){
                     Row(modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween
+                        horizontalArrangement = Arrangement.SpaceBetween
                     ){
                         Text(
-                                text = "Happy Meal",
-                                modifier = Modifier.align(Alignment.CenterVertically),
-                                style = TextStyle(
-                                        fontSize = TextUnit.Companion.Sp(26)
-                                )
+                            text = "Happy Meal",
+                            modifier = Modifier.align(Alignment.CenterVertically),
+                            style = TextStyle(
+                                fontSize = TextUnit.Companion.Sp(26)
+                            )
                         )
                         Text(
-                                text = "$5.99",
-                                style = TextStyle(
-                                        color = Color(0xFF85bb65),
-                                        fontSize = TextUnit.Companion.Sp(17)
-                                ),
-                                modifier = Modifier.align(Alignment.CenterVertically)
+                            text = "$5.99",
+                            style = TextStyle(
+                                color = Color(0xFF85bb65),
+                                fontSize = TextUnit.Companion.Sp(17)
+                            ),
+                            modifier = Modifier.align(Alignment.CenterVertically)
                         )
                     }
                     Spacer(modifier = Modifier.padding(top = 10.dp))
@@ -104,11 +104,11 @@ class MainActivity : AppCompatActivity() {
                     Spacer(modifier = Modifier.padding(top = 10.dp))
 
                     Button(onClick = { /*TODO*/ },
-                    modifier = Modifier.align(Alignment.CenterHorizontally)) {
-                            Text(text = "Order Now")
+                        modifier = Modifier.align(Alignment.CenterHorizontally)) {
+                        Text(text = "Order Now")
                     }
                 }
             }
-      }
+        }
     }
 }
