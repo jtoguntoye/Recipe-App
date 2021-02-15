@@ -44,7 +44,7 @@ class RecipeListFragment:Fragment() {
                  val recipeList = viewModel.recipes.value
 
                 for(recipe in recipeList) {
-                   Log.d("TAG","Recipe: + $recipe.title")
+                   Log.d("TAG ","Recipe: + $recipe.title")
                 }
 
                 Column(modifier = Modifier.padding(16.dp)) {
