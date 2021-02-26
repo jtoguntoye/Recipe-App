@@ -14,6 +14,7 @@ interface RecipeService {
             @Query("query") query: String
     ): RecipeSearchResponse
 
+
     @GET("get")
     suspend  fun getRecipe(
             @Header("Authorization") token: String,
