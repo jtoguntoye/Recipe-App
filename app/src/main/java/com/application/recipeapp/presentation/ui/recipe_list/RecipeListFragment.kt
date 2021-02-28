@@ -24,8 +24,10 @@ import androidx.fragment.app.Fragment
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.fragment.app.viewModels
 import com.application.recipeapp.presentation.components.RecipeCard
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @AndroidEntryPoint
+@ExperimentalCoroutinesApi
 class RecipeListFragment:Fragment() {
 
     private val viewModel: RecipeListViewModel by viewModels()

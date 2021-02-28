@@ -15,7 +15,7 @@ import javax.inject.Named
 
 
 class RecipeListViewModel
-    @ViewModelInject
+@ViewModelInject
     constructor(
         private  val recipeRepository: IrecipeRepository,
         private @Named("auth_token") val token: String
@@ -27,11 +27,11 @@ class RecipeListViewModel
         newSearch()
         }
 
-    
+
         fun newSearch() {
             viewModelScope.launch{
                 val result =   recipeRepository.search(
-                        token,
+                        token = token,
                         1,
                         "chicken"
                 )

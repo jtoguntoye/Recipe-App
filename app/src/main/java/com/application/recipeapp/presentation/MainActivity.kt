@@ -17,8 +17,9 @@ import androidx.compose.ui.text.input.textInputServiceFactory
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import com.application.recipeapp.R
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

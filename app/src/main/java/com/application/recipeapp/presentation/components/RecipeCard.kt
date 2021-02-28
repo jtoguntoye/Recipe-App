@@ -16,9 +16,11 @@ import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.unit.dp
 import com.application.recipeapp.R
 import com.application.recipeapp.domain.model.Recipe
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 
 @Composable
+@ExperimentalCoroutinesApi
 fun RecipeCard(
     recipe: Recipe,
     onClick: () -> Unit,
