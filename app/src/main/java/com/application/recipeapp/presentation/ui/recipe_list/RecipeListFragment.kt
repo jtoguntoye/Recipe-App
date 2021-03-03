@@ -5,21 +5,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.result.ActivityResultCallback
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.ActivityResultRegistry
-import androidx.activity.result.contract.ActivityResultContract
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.Button
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
-import androidx.compose.material.Text
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.unit.TextUnit
-import androidx.compose.ui.unit.dp
+import androidx.compose.material.*
+import androidx.compose.material.TextField
 import androidx.fragment.app.Fragment
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.fragment.app.viewModels
@@ -46,13 +38,27 @@ class RecipeListFragment:Fragment() {
 
                 //recipeList  variable is a MutableState,it's optimized for jetpack compose
                  val recipeList = viewModel.recipes.value
+                val query =viewModel.query.value
+                
+                Column{
+                    TextField(
+                            modifier = Modifier.fillMaxWidth(),
+                            value = query,
+                            onValueChange = {
+                                viewModel.onQueryChanged(it)
+                            },
+                            label = {
+                                Text(text = "Search")
+                            }
+                    )
 
-                LazyColumn{
+                    LazyColumn{
                     itemsIndexed(
                             items = recipeList
                     ){
                         index, recipe ->
                         RecipeCard(recipe = recipe, onClick = { /*TODO*/ })
+                        }
                     }
                 }
 
