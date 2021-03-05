@@ -17,6 +17,7 @@ import androidx.compose.material.*
 import androidx.compose.material.TextField
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
@@ -24,6 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.fragment.app.viewModels
+import com.application.recipeapp.presentation.components.FoodCategoryChip
 import com.application.recipeapp.presentation.components.RecipeCard
 import com.application.recipeapp.util.getAllFoodCategories
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -49,7 +51,7 @@ class RecipeListFragment:Fragment() {
                 Column{
                     Surface(
                          Modifier.fillMaxWidth(),
-                        color = MaterialTheme.colors.primary,
+                        color = Color.White,
                         elevation = 8.dp) {
 
                         Column() {
@@ -89,11 +91,13 @@ class RecipeListFragment:Fragment() {
                             ScrollableRow(
                                     modifier = Modifier.fillMaxWidth()) {
                                 for(category in getAllFoodCategories()){
-                                    Text(
-                                        text = category.value,
-                                        style = MaterialTheme.typography.body2,
-                                        color = MaterialTheme.colors.secondary,
-                                        modifier = Modifier.padding(8.dp))
+                                    FoodCategoryChip(
+                                        category = category.value,
+                                        onExecuteSearch = {
+                                            viewModel.newSearch(it)
+                                            viewModel.onQueryChanged(it)
+                                        })
+
                                 }
 
                             }
