@@ -6,12 +6,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.material.*
 import androidx.compose.material.TextField
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Search
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.fragment.app.viewModels
@@ -23,10 +32,6 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 class RecipeListFragment:Fragment() {
 
     private val viewModel: RecipeListViewModel by viewModels()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,16 +46,43 @@ class RecipeListFragment:Fragment() {
                 val query =viewModel.query.value
                 
                 Column{
-                    TextField(
-                            modifier = Modifier.fillMaxWidth(),
-                            value = query,
-                            onValueChange = {
-                                viewModel.onQueryChanged(it)
-                            },
-                            label = {
-                                Text(text = "Search")
-                            }
-                    )
+                    Surface(
+                         Modifier.fillMaxWidth(),
+                        color = MaterialTheme.colors.primary,
+                        elevation = 8.dp) {
+                        Row( Modifier.fillMaxWidth()){
+                            TextField(
+                                modifier = Modifier
+                                    .fillMaxWidth(.9f)
+                                    .padding(8.dp)
+                                ,
+                                value = query,
+                                onValueChange = {
+                                    viewModel.onQueryChanged(it)
+                                },
+                                label = {
+                                    Text(text = "Search")
+                                },
+                                keyboardOptions = KeyboardOptions(
+                                            keyboardType = KeyboardType.Text,
+                                            imeAction = ImeAction.Done
+                                ),
+                                leadingIcon = {
+                                    Icon(Icons.Filled.Search)
+                                },
+                                onImeActionPerformed = {action, softKeyboardController ->
+                                    if(action == ImeAction.Done) {
+                                        viewModel.newSearch(query)
+                                        softKeyboardController?.hideSoftwareKeyboard()
+                                    }
+                                },
+                                textStyle = TextStyle(color = MaterialTheme.colors.onSurface),
+                                backgroundColor = MaterialTheme.colors.surface
+
+                            )
+
+                        }
+                    }
 
                     LazyColumn{
                     itemsIndexed(
@@ -61,27 +93,6 @@ class RecipeListFragment:Fragment() {
                         }
                     }
                 }
-
-//                for(recipe in recipeList) {
-//                   Log.d("TAG ","Recipe: + $recipe.title")
-//                }
-
-
-//                Column(modifier = Modifier.padding(16.dp)) {
-//                    Text(
-//                        text = "RecipeList",
-//                        style = TextStyle(
-//                            fontSize = TextUnit.Companion.Sp(21)
-//                        )
-//                    )
-//                    Spacer(modifier = Modifier.padding(10.dp))
-//                    Button(onClick = { /*viewModel.newSearch()*/ })
-//                    {
-//                        Text(text = " Perform Search")
-//
-//                    }
-//
-//                }
 
             }
         }

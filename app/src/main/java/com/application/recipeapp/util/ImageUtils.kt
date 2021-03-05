@@ -27,9 +27,7 @@ fun loadPicture(url: String,
                 bitMapState.value = resource
             }
 
-            override fun onLoadCleared(placeholder: Drawable?) {
-                TODO("Not yet implemented")
-            }
+            override fun onLoadCleared(placeholder: Drawable?) {}
         })
 
 
@@ -42,9 +40,7 @@ fun loadPicture(url: String,
                 bitMapState.value = resource
             }
 
-            override fun onLoadCleared(placeholder: Drawable?) {
-                TODO("Not yet implemented")
-            }
+            override fun onLoadCleared(placeholder: Drawable?) {}
         })
 
 return bitMapState

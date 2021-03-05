@@ -25,16 +25,16 @@ class RecipeListViewModel
     val query = mutableStateOf("Beef")
 
     init {
-        newSearch()
+        newSearch(query.value)
     }
 
 
-    fun newSearch() {
+    fun newSearch(query: String) {
             viewModelScope.launch{
                 val result =   recipeRepository.search(
                         token = token,
                         1,
-                        "chicken"
+                        query
                 )
                 recipes.value = result
             }
