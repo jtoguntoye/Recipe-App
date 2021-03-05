@@ -1,10 +1,10 @@
 package com.application.recipeapp.presentation.ui.recipe_list
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.foundation.ScrollableRow
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -25,6 +25,7 @@ import androidx.fragment.app.Fragment
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.fragment.app.viewModels
 import com.application.recipeapp.presentation.components.RecipeCard
+import com.application.recipeapp.util.getAllFoodCategories
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @AndroidEntryPoint
@@ -50,38 +51,54 @@ class RecipeListFragment:Fragment() {
                          Modifier.fillMaxWidth(),
                         color = MaterialTheme.colors.primary,
                         elevation = 8.dp) {
-                        Row( Modifier.fillMaxWidth()){
-                            TextField(
-                                modifier = Modifier
-                                    .fillMaxWidth(.9f)
-                                    .padding(8.dp)
-                                ,
-                                value = query,
-                                onValueChange = {
-                                    viewModel.onQueryChanged(it)
-                                },
-                                label = {
-                                    Text(text = "Search")
-                                },
-                                keyboardOptions = KeyboardOptions(
-                                            keyboardType = KeyboardType.Text,
-                                            imeAction = ImeAction.Done
-                                ),
-                                leadingIcon = {
-                                    Icon(Icons.Filled.Search)
-                                },
-                                onImeActionPerformed = {action, softKeyboardController ->
-                                    if(action == ImeAction.Done) {
-                                        viewModel.newSearch(query)
-                                        softKeyboardController?.hideSoftwareKeyboard()
-                                    }
-                                },
-                                textStyle = TextStyle(color = MaterialTheme.colors.onSurface),
-                                backgroundColor = MaterialTheme.colors.surface
 
-                            )
+                        Column() {
+                            Row( Modifier.fillMaxWidth()){
+                                TextField(
+                                    modifier = Modifier
+                                        .fillMaxWidth(.9f)
+                                        .padding(8.dp)
+                                    ,
+                                    value = query,
+                                    onValueChange = {
+                                        viewModel.onQueryChanged(it)
+                                    },
+                                    label = {
+                                        Text(text = "Search")
+                                    },
+                                    keyboardOptions = KeyboardOptions(
+                                        keyboardType = KeyboardType.Text,
+                                        imeAction = ImeAction.Done
+                                    ),
+                                    leadingIcon = {
+                                        Icon(Icons.Filled.Search)
+                                    },
+                                    onImeActionPerformed = {action, softKeyboardController ->
+                                        if(action == ImeAction.Done) {
+                                            viewModel.newSearch(query)
+                                            softKeyboardController?.hideSoftwareKeyboard()
+                                        }
+                                    },
+                                    textStyle = TextStyle(color = MaterialTheme.colors.onSurface),
+                                    backgroundColor = MaterialTheme.colors.surface
 
+                                )
+
+                            }
+
+                            ScrollableRow(
+                                    modifier = Modifier.fillMaxWidth()) {
+                                for(category in getAllFoodCategories()){
+                                    Text(
+                                        text = category.value,
+                                        style = MaterialTheme.typography.body2,
+                                        color = MaterialTheme.colors.secondary,
+                                        modifier = Modifier.padding(8.dp))
+                                }
+
+                            }
                         }
+
                     }
 
                     LazyColumn{

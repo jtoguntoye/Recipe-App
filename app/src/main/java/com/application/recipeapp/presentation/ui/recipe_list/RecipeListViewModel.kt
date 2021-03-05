@@ -22,7 +22,7 @@ class RecipeListViewModel
     ): ViewModel() {
 
     val recipes: MutableState<List<Recipe>> = mutableStateOf(listOf())
-    val query = mutableStateOf("Beef")
+    val query = mutableStateOf("")
 
     init {
         newSearch(query.value)

@@ -18,7 +18,7 @@ fun loadPicture(url: String,
 @DrawableRes defaultPic: Int): MutableState<Bitmap?> {
     val bitMapState: MutableState<Bitmap?> = mutableStateOf(null);
 
-    //show default image when picture loads
+    //show default image while picture loads
     Glide.with(AmbientContext.current)
         .asBitmap()
         .load(DEFAULT_IMAGE)
